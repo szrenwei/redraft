@@ -89,8 +89,11 @@ const byDepth = (blocks) => {
     }
     for (i; i > 0; i -= 1) {
       const tmp = group;
-      group = depthStack.pop();
-      group[group.length - 1].children = tmp;
+      const lastDepthStack = depthStack.pop();
+      if (lastDepthStack.length) {
+        group = lastDepthStack;
+        group[group.length - 1].children = tmp;
+      }
     }
   };
 
